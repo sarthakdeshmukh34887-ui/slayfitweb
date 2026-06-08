@@ -153,7 +153,7 @@ export default function App() {
               {modalTitle === 'Frictionless App Delivery' ? (
                 <div className="space-y-4">
                   <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed">
-                    SlayFit is designed to compile directly to binary. Click below to begin simulated downloading or synchronize with target physical hardware.
+                    SlayFit compiles assets cleanly into modern deployment binaries. Click down below to initialize an architectural download sequence or scan to mount manually onto physical devices.
                   </p>
 
                   {downloadStep === 'generating' && (
@@ -172,16 +172,14 @@ export default function App() {
                       {/* Dual selectors list */}
                       <div className="grid grid-cols-2 gap-3">
                         <a 
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            alert("Downloading simulated APK production bundle successfully to local desktop.");
-                          }}
+                          href="https://github.com/sarthakdeshmukh34887-ui/slayfitweb/releases/download/v1.0.0/SlayFitAI.apk"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl flex flex-col items-center justify-center text-center group cursor-pointer transition-colors"
                         >
                           <Download className="w-6 h-6 text-primary-fixed-dim group-hover:scale-110 transition-transform mb-2" />
                           <span className="font-display text-xs font-bold text-white">Direct APK</span>
-                          <span className="text-[9px] text-on-surface-variant font-medium mt-0.5">v1.0.42 • 18.4MB</span>
+                          <span className="text-[9px] text-on-surface-variant font-medium mt-0.5">v1.0.0 • 73.6MB</span>
                         </a>
 
                         <div className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl flex flex-col items-center justify-center text-center group cursor-pointer transition-colors">
@@ -191,14 +189,14 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Fake live barcode mockup graphic */}
+                      {/* Dynamic live barcode block mapping directly to our distribution pipeline asset */}
                       <div className="bg-[#0c0f0f] border border-white/5 p-4 rounded-xl flex flex-col items-center justify-center gap-2">
                         <div className="w-24 h-24 bg-white p-2 rounded relative flex items-center justify-center">
                           <div className="absolute inset-x-0 top-1/2 h-0.5 bg-red-500 animate-pulse"></div>
                           <img 
                             className="w-full h-full object-contain pointer-events-none select-none"
-                            alt="Mock download validation QR code"
-                            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lh3.googleusercontent.com/&color=121414&bgcolor=ffffff"
+                            alt="Live target distribution download validation QR code"
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/sarthakdeshmukh34887-ui/slayfitweb/releases/download/v1.0.0/SlayFitAI.apk&color=121414&bgcolor=ffffff"
                           />
                         </div>
                         <p className="text-[10px] text-on-surface-variant/80 font-mono tracking-tight text-center">
