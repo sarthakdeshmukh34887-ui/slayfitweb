@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SlayFit — Download APK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700&family=Fira+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['Fira Mono', 'monospace'],
+            },
+            colors: {
+              accent: '#0066FF',
+              accentDark: '#004ec2',
+              brandLight: '#e8e8e8',
+              brandDark: '#0d0d0d',
+              brandMuted: '#888888',
+              panelBg: '#141414',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0d0d0d;
+        color: #e8e8e8;
+        overflow-x: hidden;
+      }
+      
+      /* Hover scale & split background fill effect */
+      .split-button {
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .split-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: #004ec2;
+        z-index: -1;
+        transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .split-button:hover::before {
+        left: 0;
+      }
+      .split-button:hover {
+        transform: scale(1.03);
+      }
+      .split-button span {
+        transition: transform 0.2s ease;
+        display: inline-block;
+      }
+      .split-button:hover span {
+        transform: translateX(4px);
+      }
+
+      /* Hover underline transition for nav headers */
+      .nav-dl-link {
+        position: relative;
+        color: #e8e8e8;
+        transition: color 0.3s ease;
+      }
+      .nav-dl-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #0066FF;
+        transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .nav-dl-link:hover {
+        color: #0066FF;
+      }
+      .nav-dl-link:hover::after {
+        width: 100%;
+      }
+
+      /* Animated SVG or clockwise border effect for the footer download button */
+      .footer-btn {
+        position: relative;
+        border: 2px solid transparent;
+        background-color: #0066FF;
+        overflow: hidden;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .footer-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 2px solid #ffffff;
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+        transition: clip-path 0.5s ease;
+      }
+      .footer-btn:hover::after {
+        clip-path: polygon(0 0, 101% 0, 101% 101%, -1% 101%);
+      }
+
+      /* Custom scroll triggered fade animations */
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .fade-in-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Staggered children transitions */
+      .stagger-child {
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .stagger-child.visible-child {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Fast snap inversion transition for technical tags */
+      .tech-tag {
+        transition: background-color 0.15s cubic-bezier(1, 0, 0, 1), color 0.15s cubic-bezier(1, 0, 0, 1);
+      }
+      .tech-tag:hover {
+        background-color: #e8e8e8 !important;
+        color: #0d0d0d !important;
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .scrollbar-none::-webkit-scrollbar {
+        display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .scrollbar-none {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+      /* Interactive CSS tilted smart phone frame with inside glow on hover */
+      .phone-screen-tilt {
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.8);
+      }
+      @media (hover: hover) {
+        .phone-screen-tilt {
+          transform: rotate(-3deg) translateY(10px) scale(0.95);
+        }
+        .phone-screen-tilt:hover {
+          transform: rotate(0deg) translateY(0px) scale(1);
+          box-shadow: 0 0 25px rgba(0, 102, 255, 0.35);
+        }
+      }
+      @media (hover: none) {
+        .phone-screen-tilt {
+          transform: none;
+        }
+      }
+
+      .phone-frame {
+        border: 8px solid #222222;
+        border-radius: 36px;
+        background-color: #050505;
+        position: relative;
+        width: 260px;
+        height: 520px;
+        box-shadow: inset 0 0 10px rgba(0, 102, 255, 0.1);
+      }
+      .phone-dynamic-island {
+        width: 75px;
+        height: 18px;
+        background-color: #222222;
+        border-radius: 9px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+      }
+
+      /* Install Step Rows hover styles */
+      .install-step-row {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+      }
+      .install-step-row:hover {
+        transform: translateX(8px);
+      }
+      .install-step-num {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+      }
+      .install-step-row:hover .install-step-num {
+        transform: rotate(5deg);
+        color: #0066FF;
+      }
+
+      /* Tab Underline indicator transition mapping */
+      #tabUnderline {
+        transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Sticky glass navigation layout */
+      .sticky-nav {
+        background-color: #111111;
+        border-bottom: 1px solid #1e1e1e;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      /* Feature Panel content transitions hover */
+      .feature-panel {
+        border: 2px solid #222222;
+        background-color: #0d0d0d;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .feature-panel:hover {
+        border-color: #0066FF;
+        transform: translateY(-6px);
+      }
+      .feature-panel::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        width: 4px;
+        height: 100%;
+        background-color: #0066FF;
+        transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .feature-panel:hover::before {
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased selection:bg-accent selection:text-white pb-12">
+    
+
+    <!-- Sticky Navigation Workspace -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6 px-6">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="#" class="font-display text-xl font-bold tracking-tight text-accent transition-opacity hover:opacity-90">
+          SlayFit
+        </a>
+        <div class="flex items-center gap-6">
+          <button id="navDlBtn" class="nav-dl-link font-mono text-[11px] uppercase tracking-widest text-brandLight focus:outline-none">
+            Download APK
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="max-w-6xl mx-auto px-6 pt-36 pb-16 flex flex-col items-start gap-2">
+      <div class="font-mono text-[10px] text-brandMuted uppercase tracking-widest">
+        Handcrafted for lifters
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6">
+      
+      <!-- HERO AREA -->
+      <section class="fade-in-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-36 mt-4">
+        <div class="lg:col-span-7 flex flex-col justify-center">
+          <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-left text-brandLight mb-6 leading-tight md:leading-none tracking-tight">
+            I built the gym app I actually wanted.
+          </h1>
+          <p class="font-sans text-lg md:text-xl text-brandMuted mb-8 max-w-xl leading-relaxed text-left">
+            Tracks your lifts. Tells you what to fix. Built with Gemini AI under the hood.
+          </p>
+
+          <div class="flex flex-col items-start gap-4 mb-2 w-full sm:w-auto">
+            <button id="heroDlBtn" class="split-button bg-accent text-white font-sans font-bold text-sm uppercase px-10 py-5 tracking-wider border-none rounded-none w-full sm:w-auto text-center sm:text-left cursor-pointer">
+              <span>Download APK — 70 MB</span>
+            </button>
+            <div class="text-[11px] font-mono text-brandMuted text-left pl-1">
+              Android 6.0+ · Free v1.0.0
+            </div>
+            
+            <!-- Real-time Download counter incrementing realistically -->
+            <div class="text-xs font-mono text-accent mt-2 flex items-center gap-2 pl-1">
+              <span class="inline-block w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+              <span>↓ <span id="dlCounter" class="font-bold">2,800</span> people downloaded this week</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone frames mockup (Right Side) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="phone-screen-tilt">
+            <div class="phone-frame overflow-hidden">
+              <div class="phone-dynamic-island"></div>
+              
+              <!-- App interface display preview (Live form check layout) -->
+              <div class="p-4 pt-10 h-full flex flex-col justify-between bg-zinc-950 text-xs">
+                <div>
+                  <div class="flex justify-between items-center border-b border-white/5 pb-2 mb-4">
+                    <span class="font-display font-bold text-brandLight">Deadlift — Set 3</span>
+                    <span class="font-mono text-accent text-[10px]">142.5 kg</span>
+                  </div>
+
+                  <div class="bg-brandDark/80 p-3 border border-white/5 rounded-2xl mb-4">
+                    <div class="text-[10px] text-brandMuted uppercase font-mono mb-2">CNS Fatigue Index</div>
+                    <div class="h-20 flex items-end justify-between gap-1.5 border-b border-brandMuted/30 pb-1">
+                      <div class="bg-accent/30 w-full h-1/4 rounded-t-sm"></div>
+                      <div class="bg-accent/40 w-full h-1/2 rounded-t-sm"></div>
+                      <div class="bg-accent/50 w-full h-2/3 rounded-t-sm"></div>
+                      <div class="bg-accent w-full h-5/6 rounded-t-sm"></div>
+                      <div class="bg-accent w-full h-4/5 rounded-t-sm"></div>
+                    </div>
+                    <div class="flex justify-between font-mono text-[8px] text-brandMuted mt-1">
+                      <span>Mon</span>
+                      <span>Wed</span>
+                      <span>Today</span>
+                    </div>
+                  </div>
+
+                  <div class="bg-brandDark/80 p-3 border border-accent/20 rounded-2xl">
+                    <div class="flex items-center gap-1 text-accent font-display font-medium text-[9px] mb-2 uppercase tracking-wider">
+                      <i class="fa-solid fa-bolt"></i>
+                      <span>Neural corrective</span>
+                    </div>
+                    <p class="font-sans text-[11px] text-brandLight leading-relaxed">
+                      Lifts are slow today. Neural fatigue stands high. Limit back offset.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bg-zinc-900 border border-brandMuted/10 p-2 rounded-xl flex justify-between items-center">
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
+                    <span class="font-mono text-[9px] text-brandLight uppercase">Ready state sync</span>
+                  </div>
+                  <span class="font-mono text-[9px] text-brandMuted">98.4%</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION (With Tab Switcher Layout) -->
+      <section class="fade-in-section mb-36">
+        <h2 class="font-display text-4xl font-bold mb-8 text-left text-brandLight">
+          The features
+        </h2>
+        
+        <!-- Interactive Horizontal Tab Selector -->
+        <div class="stagger-child relative border-b border-brandMuted/20 flex gap-4 md:gap-8 mb-12 overflow-x-auto pb-4 scrollbar-none">
+          <button class="feature-tab active font-display text-lg tracking-wide text-accent focus:outline-none cursor-pointer pb-1" data-tab="coach">AI Coach</button>
+          <button class="feature-tab font-display text-lg tracking-wide text-brandMuted hover:text-brandLight transition-colors focus:outline-none cursor-pointer pb-1" data-tab="logger">Logger</button>
+          <button class="feature-tab font-display text-lg tracking-wide text-brandMuted hover:text-brandLight transition-colors focus:outline-none cursor-pointer pb-1" data-tab="progress">Progress</button>
+          <button class="feature-tab font-display text-lg tracking-wide text-brandMuted hover:text-brandLight transition-colors focus:outline-none cursor-pointer pb-1" data-tab="library">Library</button>
+          
+          <!-- Moving Highlight underline bar -->
+          <div id="tabUnderline" class="absolute bottom-[-1px] h-0.5 bg-accent"></div>
+        </div>
+
+        <!-- Featured sliders cards workspace -->
+        <div class="stagger-child overflow-hidden w-full max-w-4xl">
+          <div id="featuresSlider" class="flex w-[400%]">
+            
+            <!-- Tab [AI Coach] Panel -->
+            <div class="w-1/4 pr-4">
+              <div class="feature-panel p-8 md:p-12 border border-white/5">
+                <span class="font-mono text-xs text-accent font-bold block mb-4 uppercase tracking-wider">[ Advanced intelligence ]</span>
+                <p class="font-sans text-xl md:text-2xl text-brandLight leading-relaxed mb-6">
+                  The AI coach reads recent sets before giving reviews. No generic responses.
+                </p>
+                <div class="p-4 bg-zinc-950 border-l-2 border-accent text-xs font-mono text-brandMuted">
+                  Input logs updated dynamically inside native neural pipelines.
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab [Logger] Panel -->
+            <div class="w-1/4 pr-4">
+              <div class="feature-panel p-8 md:p-12 border border-white/5">
+                <span class="font-mono text-xs text-accent font-bold block mb-4 uppercase tracking-wider">[ Low friction ]</span>
+                <p class="font-sans text-xl md:text-2xl text-brandLight leading-relaxed mb-6">
+                  Haptic alerts let you log reps easily. Avoid mindless phone scrolling instead.
+                </p>
+                <div class="p-4 bg-zinc-950 border-l-2 border-accent text-xs font-mono text-brandMuted">
+                  One tap triggers tactile set intervals directly into workout curves.
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab [Progress] Panel -->
+            <div class="w-1/4 pr-4">
+              <div class="feature-panel p-8 md:p-12 border border-white/5">
+                <span class="font-mono text-xs text-accent font-bold block mb-4 uppercase tracking-wider">[ Raw telemetry ]</span>
+                <p class="font-sans text-xl md:text-2xl text-brandLight leading-relaxed mb-6">
+                  Progress metrics show actual trends. Know if your lifts increase.
+                </p>
+                <div class="p-4 bg-zinc-950 border-l-2 border-accent text-xs font-mono text-brandMuted">
+                  Real linear growth curves drawn over weekly training benchmarks.
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab [Library] Panel -->
+            <div class="w-1/4 pr-4">
+              <div class="feature-panel p-8 md:p-12 border border-white/5">
+                <span class="font-mono text-xs text-accent font-bold block mb-4 uppercase tracking-wider">[ Direct feedback ]</span>
+                <p class="font-sans text-xl md:text-2xl text-brandLight leading-relaxed mb-6">
+                  Fifty curated exercises. Detailed biomechanic tips written for human lifters.
+                </p>
+                <div class="p-4 bg-zinc-950 border-l-2 border-accent text-xs font-mono text-brandMuted">
+                  No automated boilerplate advice. Handcrafted reference manuals.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTALL STEPS (With Click Expand Accordion) -->
+      <section class="fade-in-section grid grid-cols-1 lg:grid-cols-12 gap-12 mb-36 items-start">
+        <div class="lg:col-span-4">
+          <h2 class="font-display text-4xl font-bold mb-4 text-brandLight">
+            How to install
+          </h2>
+          <p class="font-sans text-sm text-brandMuted leading-relaxed max-w-xs">
+            I do not host this app on the official play store. Here is the process.
+          </p>
+        </div>
+
+        <div class="stagger-child lg:col-span-8 space-y-4">
+          
+          <!-- Step 1 -->
+          <div class="install-step-row p-6 bg-panelBg/20 border border-white/5 hover:border-accent/40 cursor-pointer">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-6">
+                <div class="install-step-num font-display text-2xl text-brandMuted font-bold">01</div>
+                <div class="font-sans text-brandLight font-medium text-base">Download the APK file</div>
+              </div>
+              <div class="install-step-icon text-brandMuted transition-transform duration-300">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </div>
+            </div>
+            <!-- Expanded Area -->
+            <div class="install-step-body max-h-0 overflow-hidden transition-all duration-300">
+              <p class="font-sans text-sm text-brandMuted leading-relaxed">
+                Tap the button. It is 70 MB so give it a second on slow networks.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="install-step-row p-6 bg-panelBg/20 border border-white/5 hover:border-accent/40 cursor-pointer">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-6">
+                <div class="install-step-num font-display text-2xl text-brandMuted font-bold">02</div>
+                <div class="font-sans text-brandLight font-medium text-base">Allow unknown sources in settings</div>
+              </div>
+              <div class="install-step-icon text-brandMuted transition-transform duration-300">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </div>
+            </div>
+            <!-- Expanded Area -->
+            <div class="install-step-body max-h-0 overflow-hidden transition-all duration-300">
+              <p class="font-sans text-sm text-brandMuted leading-relaxed">
+                Go to Settings, Security, then Unknown Sources. On Android 8, it is per-app.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="install-step-row p-6 bg-panelBg/20 border border-white/5 hover:border-accent/40 cursor-pointer">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-6">
+                <div class="install-step-num font-display text-2xl text-brandMuted font-bold">03</div>
+                <div class="font-sans text-brandLight font-medium text-base">Open the file, hit install</div>
+              </div>
+              <div class="install-step-icon text-brandMuted transition-transform duration-300">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </div>
+            </div>
+            <!-- Expanded Area -->
+            <div class="install-step-body max-h-0 overflow-hidden transition-all duration-300">
+              <p class="font-sans text-sm text-brandMuted leading-relaxed">
+                Locate it in files. Enter download manager. Tap and complete.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="install-step-row p-6 bg-panelBg/20 border border-white/5 hover:border-accent/40 cursor-pointer">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-6">
+                <div class="install-step-num font-display text-2xl text-brandMuted font-bold">04</div>
+                <div class="font-sans text-brandLight font-medium text-base">Log your first workout</div>
+              </div>
+              <div class="install-step-icon text-brandMuted transition-transform duration-300">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </div>
+            </div>
+            <!-- Expanded Area -->
+            <div class="install-step-body max-h-0 overflow-hidden transition-all duration-300">
+              <p class="font-sans text-sm text-brandMuted leading-relaxed">
+                Skip account setup if preferred. Start tracking. Metrics optimize soon.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SCREENSHOTS STRIP -->
+      <section class="fade-in-section mb-36">
+        <h2 class="font-display text-4xl font-bold mb-16 text-left text-brandLight">
+          Screenshots
+        </h2>
+        <div class="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 scrollbar-none snap-x snap-mandatory px-4 -mx-4 md:px-0 md:mx-0 justify-start md:justify-items-center w-full">
+          
+          <!-- Screen 1 -->
+          <div class="flex-shrink-0 w-[280px] md:w-auto snap-center flex flex-col items-center">
+            <div class="phone-screen-tilt">
+              <div class="phone-frame overflow-hidden">
+                <div class="phone-dynamic-island"></div>
+                <div class="p-4 pt-12 h-full bg-zinc-950 flex flex-col justify-between text-xs">
+                  <div>
+                    <div class="font-display text-base font-bold text-accent mb-4 border-b border-white/5 pb-2">Coach Feed</div>
+                    <div class="space-y-4">
+                      <div class="bg-zinc-900 border border-white/5 p-3 rounded rounded-tl-none">
+                        <span class="text-[9px] font-mono text-brandMuted block mb-1">USER LOG</span>
+                        Barbell path drifting. Feel tired around set end.
+                      </div>
+                      <div class="bg-accent/10 border border-accent/20 p-3 rounded rounded-tr-none">
+                        <span class="text-[9px] font-mono text-accent block mb-1">AI DETECTIVE</span>
+                        Set fatigue decreases bar speed. Lock your shoulder blades.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="font-mono text-[9px] text-brandMuted text-center">Corrective form output</div>
+                </div>
+              </div>
+            </div>
+            <span class="font-mono text-[11px] text-brandMuted mt-6 block">Real feedback console</span>
+          </div>
+
+          <!-- Screen 2 -->
+          <div class="flex-shrink-0 w-[280px] md:w-auto snap-center flex flex-col items-center animate-delay-1">
+            <div class="phone-screen-tilt">
+              <div class="phone-frame overflow-hidden">
+                <div class="phone-dynamic-island"></div>
+                <div class="p-4 pt-12 h-full bg-zinc-950 flex flex-col justify-between text-xs">
+                  <div>
+                    <div class="font-display text-base font-bold text-accent mb-4 border-b border-white/5 pb-2">Volume trends</div>
+                    <div class="bg-zinc-900 border border-white/10 p-4 rounded mb-4">
+                      <div class="text-[9px] font-mono text-brandMuted uppercase">Weekly Lift Index</div>
+                      <div class="text-3xl font-display font-bold text-brandLight mt-1">+14.2%</div>
+                    </div>
+                    <div class="space-y-2.5 font-mono text-[9px] text-brandMuted">
+                      <div class="flex justify-between border-b border-white/5 pb-1">
+                        <span>Squats</span>
+                        <span class="text-brandLight">140 kg</span>
+                      </div>
+                      <div class="flex justify-between border-b border-white/5 pb-1">
+                        <span>Deadlift</span>
+                        <span class="text-brandLight">185 kg</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span>Bench</span>
+                        <span class="text-brandLight">105 kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="font-mono text-[9px] text-brandMuted text-center">Neural readiness trends</div>
+                </div>
+              </div>
+            </div>
+            <span class="font-mono text-[11px] text-brandMuted mt-6 block">Progress trends interface</span>
+          </div>
+
+          <!-- Screen 3 -->
+          <div class="flex-shrink-0 w-[280px] md:w-auto snap-center flex flex-col items-center animate-delay-2">
+            <div class="phone-screen-tilt">
+              <div class="phone-frame overflow-hidden">
+                <div class="phone-dynamic-island"></div>
+                <div class="p-4 pt-12 h-full bg-zinc-950 flex flex-col justify-between text-xs">
+                  <div>
+                    <div class="font-display text-base font-bold text-accent mb-4 border-b border-white/5 pb-2">Lifts library</div>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-accent/20 border border-accent/40 rounded flex justify-between items-center">
+                        <span class="font-sans font-medium text-brandLight">Barbell Back Squat</span>
+                        <span class="font-mono text-[8px] px-1 bg-accent/30 text-accent rounded uppercase">Active</span>
+                      </div>
+                      <div class="p-3 bg-zinc-900 border border-white/5 rounded flex justify-between items-center">
+                        <span class="font-sans text-brandMuted">Sumo Pulls</span>
+                        <span class="font-mono text-[8px] px-1 bg-zinc-800 text-brandMuted rounded uppercase">Locked</span>
+                      </div>
+                      <div class="p-3 bg-zinc-900 border border-white/5 rounded flex justify-between items-center">
+                        <span class="font-sans text-brandMuted">Overhead Press</span>
+                        <span class="font-mono text-[8px] px-1 bg-zinc-800 text-brandMuted rounded uppercase">Locked</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="font-mono text-[9px] text-brandMuted text-center">Local model parameters</div>
+                </div>
+              </div>
+            </div>
+            <span class="font-mono text-[11px] text-brandMuted mt-6 block">Curated templates database</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TECH SPECS STRIP & TAGS -->
+      <section class="fade-in-section mb-36 py-8 border-y border-brandMuted/10">
+        <div class="flex flex-wrap gap-3 items-center justify-start">
+          <span class="tech-tag font-mono text-[11px] px-3 py-1.5 bg-panelBg text-brandMuted border border-white/5 rounded-none cursor-default uppercase">React Native</span>
+          <span class="tech-tag font-mono text-[11px] px-3 py-1.5 bg-panelBg text-brandMuted border border-white/5 rounded-none cursor-default uppercase">Expo 51</span>
+          <span class="tech-tag font-mono text-[11px] px-3 py-1.5 bg-panelBg text-brandMuted border border-white/5 rounded-none cursor-default uppercase">Gemini AI</span>
+          <span class="tech-tag font-mono text-[11px] px-3 py-1.5 bg-panelBg text-brandMuted border border-white/5 rounded-none cursor-default uppercase">Supabase</span>
+          <span class="tech-tag font-mono text-[11px] px-3 py-1.5 bg-panelBg text-brandMuted border border-white/5 rounded-none cursor-default uppercase">On-Device CNS</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-brandMuted/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+      <div class="space-y-3">
+        <div class="font-display text-2xl font-bold text-accent">SlayFit</div>
+        <p class="font-sans text-sm text-brandMuted max-w-sm leading-relaxed">
+          No trackers. No cloud sync. Your stats stay on your device.
+        </p>
+      </div>
+      
+      <div class="flex flex-col items-start md:items-end gap-4 w-full md:w-auto">
+        <button id="footerDlBtn" class="footer-btn text-white font-sans font-bold text-sm uppercase px-10 py-5 tracking-wider border-none w-full md:w-auto cursor-pointer">
+          <span>Download APK again</span>
+        </button>
+        <span class="font-mono text-[10px] text-brandMuted mt-2 block tracking-wider">
+          Copyright 2026 SlayFit
+        </span>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+      // 1. Subtle cursor trail effect (Dot trails client mouse with elastic loop)
+      let trail = null;
+      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+      if (!isTouch) {
+        window.addEventListener('mousemove', initTrail, { once: true });
+      }
+
+      function initTrail() {
+        trail = document.createElement('div');
+        trail.style.position = 'fixed';
+        trail.style.width = '6px';
+        trail.style.height = '6px';
+        trail.style.backgroundColor = '#0066FF';
+        trail.style.borderRadius = '50%';
+        trail.style.pointerEvents = 'none';
+        trail.style.zIndex = '9999';
+        trail.style.opacity = '0';
+        trail.style.transition = 'opacity 0.2s';
+        document.body.appendChild(trail);
+
+        let mouseX = 0, mouseY = 0;
+        let pX = 0, pY = 0;
+        let fadeTimer;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          trail.style.opacity = '1';
+          clearTimeout(fadeTimer);
+          fadeTimer = setTimeout(() => {
+            trail.style.opacity = '0';
+          }, 300);
+        });
+
+        function loopTrail() {
+          pX += (mouseX - pX) * 0.15;
+          pY += (mouseY - pY) * 0.15;
+          trail.style.left = (pX - 3) + 'px';
+          trail.style.top = (pY - 3) + 'px';
+          requestAnimationFrame(loopTrail);
+        }
+        loopTrail();
+      }
+
+      window.addEventListener('touchstart', () => {
+        if (trail) {
+          trail.style.display = 'none';
+        }
+      }, { passive: true });
+
+      // 2. Sticky Glass Header logic
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) {
+          navbar.classList.add('sticky-nav');
+          navbar.classList.remove('py-6');
+          navbar.classList.add('py-4');
+        } else {
+          navbar.classList.remove('sticky-nav');
+          navbar.classList.add('py-6');
+          navbar.classList.remove('py-4');
+        }
+      });
+
+      // 3. Scroll triggered fade-in observer (IntersectionObserver)
+      const observerOptions = {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      };
+
+      const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // Trigger stagger for child items
+            const childItems = entry.target.querySelectorAll('.stagger-child');
+            childItems.forEach((child, i) => {
+              setTimeout(() => {
+                child.classList.add('visible-child');
+              }, i * 100);
+            });
+            
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in-section').forEach(sec => {
+        fadeObserver.observe(sec);
+      });
+
+      // 5. Features tab switcher implementation
+      const tabs = document.querySelectorAll('.feature-tab');
+      const tfUnderline = document.getElementById('tabUnderline');
+      const slider = document.getElementById('featuresSlider');
+
+      function alignUnderline(elem) {
+        if (elem) {
+          tfUnderline.style.left = elem.offsetLeft + 'px';
+          tfUnderline.style.width = elem.offsetWidth + 'px';
+        }
+      }
+
+      alignUnderline(document.querySelector('.feature-tab.active'));
+
+      tabs.forEach((tb, idx) => {
+        tb.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('active', 'text-accent');
+            t.classList.add('text-brandMuted');
+          });
+          tb.classList.add('active', 'text-accent');
+          tb.classList.remove('text-brandMuted');
+          alignUnderline(tb);
+          
+          // Auto-center active tab on mobile sideways overflow rails
+          tb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          
+          // Slider shifts index dynamically
+          slider.style.transform = `translateX(-${idx * 25}%)`;
+          slider.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+      });
+
+      // 5b. Mobile touch swiping gesture actions for Features Slider
+      let swipeStartX = 0;
+      let swipeEndX = 0;
+
+      slider.addEventListener('touchstart', (e) => {
+        swipeStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', (e) => {
+        swipeEndX = e.changedTouches[0].clientX;
+        const swipeThreshold = 55;
+        const diff = swipeStartX - swipeEndX;
+        const activeTab = document.querySelector('.feature-tab.active');
+        const tabsArr = Array.from(tabs);
+        let currentIdx = tabsArr.indexOf(activeTab);
+
+        if (diff > swipeThreshold) {
+          // Swiped left, transition to next feature content card
+          if (currentIdx < tabsArr.length - 1) {
+            tabsArr[currentIdx + 1].click();
+          }
+        } else if (diff < -swipeThreshold) {
+          // Swiped right, transition to previous feature content card
+          if (currentIdx > 0) {
+            tabsArr[currentIdx - 1].click();
+          }
+        }
+      }, { passive: true });
+
+      // Align tab underline dynamically on window dimension scale limits
+      window.addEventListener('resize', () => {
+        alignUnderline(document.querySelector('.feature-tab.active'));
+      });
+
+      // 6. Interactive accordion steps list toggle click
+      const stepRows = document.querySelectorAll('.install-step-row');
+      stepRows.forEach(row => {
+        row.addEventListener('click', () => {
+          const body = row.querySelector('.install-step-body');
+          const stepChevron = row.querySelector('.install-step-icon');
+          const isCurrentlyOpen = parseInt(body.style.maxHeight) > 0 || body.classList.contains('open-step');
+
+          // Close all rows
+          stepRows.forEach(otherRow => {
+            const otherBody = otherRow.querySelector('.install-step-body');
+            const otherChevron = otherRow.querySelector('.install-step-icon');
+            otherBody.style.maxHeight = '0px';
+            otherBody.classList.remove('open-step', 'mt-3');
+            if (otherChevron) otherChevron.style.transform = 'rotate(0deg)';
+          });
+
+          // Open targeted row if collapsed
+          if (!isCurrentlyOpen) {
+            body.style.maxHeight = body.scrollHeight + 'px';
+            body.classList.add('open-step', 'mt-3');
+            if (stepChevron) stepChevron.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+
+      // 7. Simulated Live Count Up tracker logic
+      const trackerTarget = 2847;
+      let trackerStart = 2800;
+      const countOutput = document.getElementById('dlCounter');
+
+      const incrementDelay = Math.floor(1500 / (trackerTarget - trackerStart));
+      const countUpTimer = setInterval(() => {
+        trackerStart++;
+        countOutput.textContent = trackerStart.toLocaleString();
+        if (trackerStart >= trackerTarget) {
+          clearInterval(countUpTimer);
+          triggerPeriodicOrganicDls();
+        }
+      }, incrementDelay);
+
+      // Organic realistic periodic downloads
+      function triggerPeriodicOrganicDls() {
+        setInterval(() => {
+          if (Math.random() > 0.45) {
+            let current = parseInt(countOutput.textContent.replace(/,/g, ''), 10);
+            current += 1;
+            countOutput.textContent = current.toLocaleString();
+          }
+        }, 5000);
+      }
+
+      // 8. Dynamic secure APK Download click handler core
+      const actionButtons = [
+        document.getElementById('heroDlBtn'),
+        document.getElementById('navDlBtn'),
+        document.getElementById('footerDlBtn')
+      ];
+
+      actionButtons.forEach(btn => {
+        if (!btn) return;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Re-trigger download action metrics
+          const virtualAnchor = document.createElement('a');
+          virtualAnchor.href = './SlayFitAI.apk';
+          virtualAnchor.download = 'SlayFitAI.apk';
+          document.body.appendChild(virtualAnchor);
+          virtualAnchor.click();
+          document.body.removeChild(virtualAnchor);
+
+          const cachedContent = btn.innerHTML;
+          
+          btn.innerHTML = `
+            <div class="flex items-center justify-center gap-2">
+              <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Downloading...</span>
+            </div>
+          `;
+
+          setTimeout(() => {
+            btn.innerHTML = `
+              <div class="flex items-center justify-center gap-2 text-emerald-400 font-bold">
+                <i class="fa-solid fa-check"></i>
+                <span>✓ Done</span>
+              </div>
+            `;
+            setTimeout(() => {
+              btn.innerHTML = cachedContent;
+            }, 3000);
+          }, 2500);
+
+        });
+      });
+
+    </script>
+  </body>
+</html>

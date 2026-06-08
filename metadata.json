@@ -1,0 +1,6 @@
+{
+  "name": "SlayFit Tracker",
+  "description": "A premium dark-first interactive showcase for SlayFit Tracker. Explore AI coaching, sports performance analytics, detailed system specs, and comprehensive FAQs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
